@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+	<import resource="archetype-webapp-tx.xml"/>
+
+	<jee:jndi-lookup id="entityManagerFactory" jndi-name="java:comp/env/archetype-model"/>
+
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<import resource="archetype-webapp-dao.xml"/>
+	<import resource="archetype-webapp-business.xml"/>
+	<import resource="archetype-webapp-manager.xml"/>
+
+</beans>

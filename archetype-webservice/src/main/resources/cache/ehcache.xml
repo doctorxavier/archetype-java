@@ -1,0 +1,11 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd">
+	
+	<defaultCache eternal="false" overflowToDisk="false"
+		maxElementsInMemory="1000" timeToIdleSeconds="30" timeToLiveSeconds="60" />
+
+	<cache name="org.archetype.model.Father" eternal="false"
+		overflowToDisk="true" maxElementsInMemory="1000" timeToIdleSeconds="4"
+		timeToLiveSeconds="4" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="4" />
+</ehcache>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="fatherManager" class="archetype.ws.manager.FatherManager">
+		<property name="fatherHandler" ref="fatherHandler" />
+	</bean>
+
+	<bean id="childrenManager" class="archetype.ws.manager.ChildrenManager">
+		<property name="childrenHandler" ref="childrenHandler" />
+	</bean>
+
+</beans>

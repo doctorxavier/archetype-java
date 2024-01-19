@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+		
+	<persistence-unit name="archetype-model" transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>java:archetypeDS</jta-data-source>
+		<!-- <non-jta-data-source>java:archetypeDS-NONJTA</non-jta-data-source> -->
+		
+		<class>archetype.model.Audit</class>
+		<class>archetype.model.Father</class>
+		<class>archetype.model.Children</class>
+		
+		<properties>
+			<property name="jboss.entity.manager.factory.jndi.name" value="java:archetype-model"/>
+			<property name="eclipselink.target-server" value="archetype.utils.persistence.platform.server.jboss.JBossPlatform"/>
+            <property name="eclipselink.target-database" value="MySQL"/>
+            <!-- <property name="eclipselink.jdbc.sequence-connection-pool.non-jta-data-source" value="archetypeDS-NONJTA" /> -->
+			<property name="eclipselink.logging.level" value="INFO"/>
+			<property name="eclipselink.weaving" value="static" />
+			<property name="eclipselink.cache.type.Father" value="WEAK"/>
+			<property name="eclipselink.cache.type.Children" value="WEAK"/>
+			<property name="eclipselink.cache.coordinationType" value="INVALIDATE_CHANGED_OBJECTS"/>
+			<property name="eclipselink.register.run.mbean" value="true"/>
+
+			<property name="eclipselink.profiler" value="PerformanceProfiler"/>
+<!--			<property name="eclipselink.profiler" value="DMSPerformanceProfiler"/>-->
+<!--			<property name="eclipselink.profiler" value="QueryMonitor"/>-->
+			<property name="org.eclipse.persistence.querymonitor" value="true"/>
+
+<!--			<property name="eclipse.persistence.xml.platform" value="org.eclipse.persistence.platform.xml.jaxp.JAXPPlatform"/>-->
+			<property name="eclipselink.session.customizer" value="archetype.utils.jms.JMSCacheCoordinatorSession"/>
+<!--			<property name="eclipselink.cache.coordination.protocol" value="jms"/>-->
+<!--			<property name="eclipselink.cache.coordination.jms.host" value="jnp://localhost:1100"/>-->
+<!--			<property name="eclipselink.cache.coordination.jms.topic" value="topic/jfportal"/>-->
+<!--			<property name="eclipselink.cache.coordination.jms.factory" value="ClusteredXAConnectionFactory"/>-->
+<!--			<property name="eclipselink.cache.coordination.naming-service" value="jndi"/>-->
+<!--			<property name="eclipselink.cache.coordination.jndi.user" value="guest"/>-->
+<!--			<property name="eclipselink.cache.coordination.jndi.password" value="guest"/>-->
+<!--			<property name="eclipselink.cache.coordination.jndi.initial-context-factory" value="org.jboss.naming.NamingContextFactory"/>-->
+
+		</properties>
+  </persistence-unit>
+	
+</persistence>

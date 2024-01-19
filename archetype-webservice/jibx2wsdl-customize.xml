@@ -1,0 +1,17 @@
+<custom map-abstract="true" property-access="true" value-style="element"
+	require="none" namespace-style="fixed" namespace="http://archetype/ws/model"
+	add-constructors="true">
+	
+	<wsdl service-base="http://localhost:8080/archetype-webservice" wrapped="false">
+		<service 
+				class="archetype.ws.endpoint.WSEndPoint"
+				service-name="archetype-service" 
+				includes="getFathers, getChildrens">
+				
+			<operation method-name="getFathers" operation-name="getFathers" />
+			<operation method-name="getChildrens" operation-name="getChildrens" />
+			
+		</service>
+	</wsdl>
+
+</custom>

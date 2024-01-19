@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd"
+	default-lazy-init="false">
+
+	<import resource="archetype-model-tx.xml"/>
+
+<!-- 	<bean id="jdbcLoggerConfig" -->
+<!-- 		class="net.sourceforge.jdbclogger.spring.JdbcLoggerBeanPostProcessor"> -->
+<!-- 		<property name="enabled" value="true" /> -->
+<!-- 		<property name="dataSourceConfigurations"> -->
+<!-- 			<list> -->
+<!-- 				<bean -->
+<!-- 					class="net.sourceforge.jdbclogger.spring.JdbcLoggerDataSourceConfiguration"> -->
+<!-- 					<property name="dataSourceBeanName" value="dataSource" /> -->
+<!-- 					<property name="driverClassNamePropertyName" value="driverClassName" /> -->
+<!-- 				</bean> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 		<property name="targetDriverClassNames"> -->
+<!-- 			<list> -->
+<!-- 				<value>com.mysql.jdbc.Driver</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+<!--	<jee:jndi-lookup id="entityManagerFactory" jndi-name="java:/archetype-model"/>-->
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/archetype_database" />
+		<property name="username" value="archetype_usr" />
+		<property name="password" value="archetype_pwd" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="false" />
+				<property name="generateDdl" value="false" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQLInnoDBDialect" />
+			</bean>
+		</property>
+		<property name="jpaPropertyMap">
+			<map>
+				<!--
+					<entry key="hibernate.transaction.manager_lookup_class"
+					value="org.hibernate.transaction.JOTMTransactionManagerLookup" />
+				-->
+				<entry key="hibernate.transaction.flush_before_completion"
+					value="true" />
+				<!--
+					<entry key="hibernate.transaction.auto_close_session" value="true"
+					/>
+				-->
+				<!-- <entry key="hibernate.current_session_context_class" value="jta" /> -->
+				<entry key="hibernate.connection.release_mode" value="auto" />
+				<!--				<entry key="hibernate.connection.autocommit" value="false" />-->
+				<entry key="hibernate.show_sql" value="false" />
+				<entry key="hibernate.format_sql" value="false" />
+				<entry key="hibernate.use_sql_comments" value="false" />
+				<entry key="hibernate.generate_statistics" value="false" />
+				<entry key="hibernate.max_fetch_depth" value="2" />
+<!--				<entry key="hibernate.cache.provider_class" -->
+<!--					value="net.sf.ehcache.hibernate.SingletonEhCacheProvider" />-->
+<!--				<entry key="hibernate.cache.provider_configuration" value="ehcache.xml" />-->
+<!--				<entry key="hibernate.cache.use_second_level_cache" value="true" />-->
+<!--				<entry key="hibernate.cache.use_query_cache" value="true" />-->
+			</map>
+		</property>
+	</bean>
+
+	<!--
+		<bean id="jotm"
+		class="org.springframework.transaction.jta.JotmFactoryBean" />
+	-->
+	<!--
+		<bean id="jtaTransactionManager"
+		class="org.springframework.transaction.jta.JtaTransactionManager" >
+	-->
+	<!--		<property name="userTransaction" ref="jotm" />-->
+	<!--		<property name="transactionManager" ref="jotm" />-->
+	<!--	</bean>-->
+
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+</beans>

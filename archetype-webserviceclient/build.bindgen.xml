@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="archetype-model" default="bindgen" basedir=".">
+	<property name="jibx-home" value="/opt/jibx"/>
+	<!-- set classpath for compiling and running application with JiBX -->
+	<path id="classpath">
+		<fileset dir="${jibx-home}/lib" includes="*.jar" />
+		<pathelement location="bin" />
+	</path>
+	<!-- generate default binding and schema -->
+	<target name="bindgen">
+		<echo message="Running BindGen tool" />
+		<java classpathref="classpath" fork="true" failonerror="true"
+			classname="org.jibx.binding.generator.BindGen">
+			<!-- <arg value="-o" /> -->
+
+			<arg value="-v" />
+			<arg value="-c"/>
+			<arg value="abstract-factory.xml"/>
+			<arg value="-t" />
+			<arg value="src/main/resources/binding_builds" />
+			<arg value="-p" />
+			<arg value="target/classes" />
+			
+			<arg value="archetype.ws.client.model.Father" />
+			<arg value="archetype.ws.client.model.Children" />
+			<arg value="archetype.ws.client.model.request.GetFathers" />
+			<arg value="archetype.ws.client.model.request.GetChildrens" />
+			<arg value="archetype.ws.client.model.response.Fathers" />
+			<arg value="archetype.ws.client.model.response.Childrens" />
+			
+		</java>
+	</target>
+</project>

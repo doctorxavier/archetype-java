@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<import resource="archetype-model-tx.xml"/>
+
+<!--	<bean id="jdbcLoggerConfig"-->
+<!--		class="net.sourceforge.jdbclogger.spring.JdbcLoggerBeanPostProcessor">-->
+<!--		<property name="enabled" value="true" />-->
+<!--		<property name="dataSourceConfigurations">-->
+<!--			<list>-->
+<!--				<bean-->
+<!--					class="net.sourceforge.jdbclogger.spring.JdbcLoggerDataSourceConfiguration">-->
+<!--					<property name="dataSourceBeanName" value="dataSource" />-->
+<!--					<property name="driverClassNamePropertyName" value="driverClassName" />-->
+<!--				</bean>-->
+<!--			</list>-->
+<!--		</property>-->
+<!--		<property name="targetDriverClassNames">-->
+<!--			<list>-->
+<!--				<value>com.mysql.jdbc.Driver</value>-->
+<!--			</list>-->
+<!--		</property>-->
+<!--	</bean>-->
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/archetype_database" />
+		<property name="username" value="archetype_usr" />
+		<property name="password" value="archetype_pwd" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter">
+				<property name="databasePlatform" value="org.apache.openjpa.jdbc.sql.MySQLDictionary" />
+			</bean>
+		</property>
+		<property name="loadTimeWeaver">
+<!--			<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />-->
+			<bean class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver" />
+		</property>
+		<property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.OpenJpaDialect" />
+        </property>
+		<property name="jpaPropertyMap">
+			<map>
+<!--			<entry key="openjpa.MaxFetchDepth" value="1" />-->
+<!--			<entry key="openjpa.jdbc.MappingDefaults" value="jpa(ForeignKeyDeleteAction=restrict,JoinForeignKeyDeleteAction=restrict)" />-->
+<!--			<entry key="openjpa.DataCache" value="true" />-->
+<!--			<entry key="openjpa.RemoteCommitProvider" value="sjvm" />-->
+				<entry key="openjpa.DynamicEnhancementAgent" value="true"/>
+				<entry key="openjpa.RuntimeUnenhancedClasses" value="warn"/>
+<!--			<entry key="openjpa.Log" value="DefaultLevel=WARN, Runtime=TRACE, SQL=TRACE" />-->
+<!--			<entry key="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.MySQLDictionary" />-->
+			</map>
+		</property>
+	</bean>
+
+	<!--
+		<bean id="jotm"
+		class="org.springframework.transaction.jta.JotmFactoryBean" />
+	-->
+	<!--
+		<bean id="jtaTransactionManager"
+		class="org.springframework.transaction.jta.JtaTransactionManager" >
+	-->
+	<!--		<property name="userTransaction" ref="jotm" />-->
+	<!--		<property name="transactionManager" ref="jotm" />-->
+	<!--	</bean>-->
+
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<bean id="dao" class="archetype.dao.jpa.DaoImpl" />
+
+	<bean id="fatherManager" class="archetype.dao.impl.FatherManager">
+		<property name="dao" ref="dao" />
+	</bean>
+	
+	<bean id="fatherParser" class="archetype.service.FatherParser">
+		<property name="fatherManager" ref="fatherManager"/>
+	</bean>
+
+	<bean id="printData" class="archetype.business.impl.PrintData">
+		<property name="fatherManager" ref="fatherManager" />
+	</bean>
+
+</beans>

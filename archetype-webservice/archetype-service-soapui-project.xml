@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="archetype-service" resourceRoot="" soapui-version="4.6.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="archetype-serviceBinding" type="wsdl" bindingName="{http://archetype.ws.endpoint/archetype-service}archetype-serviceBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/webservice/archetype-service.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/webservice/archetype-service.wsdl"><con:part><con:url>http://localhost:8080/webservice/archetype-service.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://archetype.ws.endpoint/archetype-service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://archetype.ws.endpoint/archetype-service" xmlns:ns1="http://archetype/ws/model">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://archetype/ws/model" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://archetype/ws/model">
+      <xs:complexType name="getFathers">
+        <xs:sequence>
+          <xs:element type="xs:int" name="rows" minOccurs="0"/>
+          <xs:element type="xs:int" name="start" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="father">
+        <xs:sequence>
+          <xs:element type="ns1:audit" name="audit" minOccurs="0"/>
+          <xs:element type="ns1:children" name="children" minOccurs="0"/>
+          <xs:element name="childrens" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element type="ns1:children" name="children" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element type="ns1:father" name="father" minOccurs="0"/>
+          <xs:element name="fathers" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element type="ns1:father" name="father" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element type="xs:int" name="id" minOccurs="0"/>
+          <xs:element type="xs:string" name="name" minOccurs="0"/>
+          <xs:element type="xs:int" name="version" minOccurs="0"/>
+          <xs:element type="xs:boolean" name="mother" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getChildrens">
+        <xs:sequence>
+          <xs:element type="xs:int" name="rows" minOccurs="0"/>
+          <xs:element type="xs:int" name="start" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="children">
+        <xs:sequence>
+          <xs:element type="ns1:audit" name="audit" minOccurs="0"/>
+          <xs:element name="fathers" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element type="ns1:father" name="father" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element type="xs:int" name="id" minOccurs="0"/>
+          <xs:element type="xs:string" name="name" minOccurs="0"/>
+          <xs:element type="xs:int" name="version" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="audit">
+        <xs:sequence>
+          <xs:element type="xs:dateTime" name="created" minOccurs="0"/>
+          <xs:element type="xs:dateTime" name="modified" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fathers">
+        <xs:sequence>
+          <xs:element name="fathers" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element type="ns1:father" name="father" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="childrens">
+        <xs:sequence>
+          <xs:element name="childrens" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element type="ns1:children" name="children" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getFathers">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="tns:getFathers" name="getFathers" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getFathersResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="tns:fathers" name="return" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getChildrens">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="tns:getChildrens" name="getChildrens" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getChildrensResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="tns:childrens" name="return" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getFathersMessage">
+    <wsdl:part name="part" element="ns1:getFathers"/>
+  </wsdl:message>
+  <wsdl:message name="getFathersResponseMessage">
+    <wsdl:part name="part" element="ns1:getFathersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getChildrensMessage">
+    <wsdl:part name="part" element="ns1:getChildrens"/>
+  </wsdl:message>
+  <wsdl:message name="getChildrensResponseMessage">
+    <wsdl:part name="part" element="ns1:getChildrensResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="archetype-servicePortType">
+    <wsdl:operation name="getFathers">
+      <wsdl:input message="tns:getFathersMessage"/>
+      <wsdl:output message="tns:getFathersResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="getChildrens">
+      <wsdl:input message="tns:getChildrensMessage"/>
+      <wsdl:output message="tns:getChildrensResponseMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="archetype-serviceBinding" type="tns:archetype-servicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="getFathers">
+      <soap:operation soapAction="urn:getFathers"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getChildrens">
+      <soap:operation soapAction="urn:getChildrens"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="archetype-service">
+    <wsdl:port name="archetype-servicePort" binding="tns:archetype-serviceBinding">
+      <soap:address location="http://localhost:8080/archetype-webservice/archetype-service"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/archetype-webservice/archetype-service</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:getChildrens" name="getChildrens" bindingOperationName="getChildrens" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservice/archetype-service</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <getChildrens xmlns="http://archetype/ws/model">
+            <rows>1</rows>
+            <start>0</start>
+      </getChildrens>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getChildrens"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:getFathers" name="getFathers" bindingOperationName="getFathers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservice/archetype-service</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header/>
+   <soapenv:Body>
+         <getFathers xmlns="http://archetype/ws/model">
+            <rows>1</rows>
+            <start>1</start>
+         </getFathers>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getFathers"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

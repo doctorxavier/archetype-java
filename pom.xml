@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>archetype</groupId>
+	<artifactId>archetype</artifactId>
+	<version>0.0.7-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>archetype</name>
+
+	<modules>
+		<module>archetype-model</module>
+		<module>archetype-webapp</module>
+		<module>archetype-webservice</module>
+		<module>archetype-webserviceclient</module>
+	</modules>
+	
+	<properties>
+		<org.springframework.version>4.1.6.RELEASE</org.springframework.version>
+		<jibx.version>1.2.6</jibx.version>
+		<junit.version>4.12</junit.version>
+		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+		<maven.resources.plugin.version>2.7</maven.resources.plugin.version>
+		<maven.checkstyle.plugin.version>2.15</maven.checkstyle.plugin.version>
+		<maven.antrun.plugin.version>1.7</maven.antrun.plugin.version>
+		<commons.logging.version>1.2</commons.logging.version>
+		<java.version>1.7</java.version>
+		<encoding>utf-8</encoding>
+	</properties>
+
+	<build>
+		<finalName>archetype</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${encoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<preparationGoals>clean install -Dmaven.test.skip=true</preparationGoals>
+					<tagBase>http://git.arandra.com/archetype/tags</tagBase>
+					<username>${scm.username}</username>
+					<password>${scm.password}</password>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-dependency-plugin</artifactId>
+                                        <versionRange>[2.8,)</versionRange>
+                                        <goals>
+                                            <goal>copy-dependencies</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute />
+                                    </action>
+                                </pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.jibx</groupId>
+										<artifactId>jibx-maven-plugin</artifactId>
+										<versionRange>[1.2.5,)</versionRange>
+										<goals>
+											<goal>bind</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-antrun-plugin</artifactId>
+										<versionRange>[1.7,)</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+	</build>
+
+	<scm>
+		<connection>scm:hg:http://mercurial.arandra.com/archetype</connection>
+		<developerConnection>scm:hg:http://mercurial.arandra.com/archetype</developerConnection>
+		<url>http://mercurial.arandra.com/archetype/</url>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>ssh-flightmine</id>
+			<url>scp://maven.arandra.com/maven-repo-flightmine</url>
+		</repository>
+	</distributionManagement>
+	
+</project>

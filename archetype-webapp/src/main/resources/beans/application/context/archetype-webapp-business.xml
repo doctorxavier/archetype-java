@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
+	
+	<bean id="abstractHandler" class="archetype.business.impl.AbstractHandler" abstract="true" />
+    
+    <bean id="fatherHandler" class="archetype.business.impl.FatherHandler" parent="abstractHandler">
+    	<property name="dao" ref="fatherDao" />
+    </bean>
+	
+	<bean id="childrenHandler" class="archetype.business.impl.ChildrenHandler" parent="abstractHandler">
+		<property name="dao" ref="childrenDao" />
+	</bean>
+	
+</beans>

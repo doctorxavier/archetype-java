@@ -1,0 +1,54 @@
+<server description="new server">
+
+	<logging traceFormat="ENHANCED" traceSpecification="*=audit=enabled:com.ibm.itso.*=debug=enabled"/>
+
+	<library id="MySQLLibs">
+		<fileset dir="${shared.resource.dir}/MySQLLibs" includes="mysql-connector-java-5.1.34.jar"/>
+	</library>
+	
+	<library id="EclipseLinkLibs">
+		<fileset dir="${shared.resource.dir}/EclipseLinkLibs" includes="*.jar"/>
+	</library>
+	
+	<library id="BCPHBKLibs">
+		<fileset dir="${shared.resource.dir}/BCPHBKLibs" includes="*.jar"/>
+	</library>
+	
+	<jdbcDriver id="MySQL" libraryRef="MySQLLibs" />
+	
+	<dataSource id="archetypeDS" jndiName="jdbc/archetypeDS" jdbcDriverRef="MySQL" >
+		<properties URL="jdbc:mysql://localhost:3306/archetype_database" user="archetype_usr" password="archetype_pwd" />
+	</dataSource>
+	
+	<dataSource id="archetypeDS-NONJTA" jndiName="jdbc/archetypeDS-NONJTA" jdbcDriverRef="MySQL" transactional="false" >
+		<properties URL="jdbc:mysql://localhost:3306/archetype_database" user="archetype_usr" password="archetype_pwd" />
+	</dataSource>
+	
+<!--   NOTE: The following configuration specifies that EclipseLink will be used as the default persistence provider.  -->
+<!-- 	  This configuration can be removed if you add the following element to the persistence.xml file: -->
+<!-- 	  <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
+
+<!-- 	<jpa defaultPersistenceProvider="org.eclipse.persistence.jpa.PersistenceProvider" /> -->
+	
+	<featureManager>
+		<!-- <feature>adminCenter-1.0</feature> -->
+		<feature>jsf-2.0</feature>
+		<feature>jpa-2.0</feature>
+		<feature>jaxrs-1.1</feature>
+	    <feature>localConnector-1.0</feature>
+    </featureManager>
+	
+	<!-- <quickStartSecurity userName="admin" userPassword="adminpwd"/> -->
+	
+	<!-- <keyStore id="defaultKeyStore" password="Liberty"/> -->
+	
+	<httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+	
+	<applicationMonitor updateTrigger="mbean"/>
+	
+    <webApplication contextRoot="webapp" id="archetype-webapp" location="archetype-webapp.war" name="archetype-webapp">
+    	<classloader commonLibraryRef="BCPHBKLibs" />
+<!--     	<classloader delegation="parentLast" /> -->
+    </webApplication>
+	
+</server>

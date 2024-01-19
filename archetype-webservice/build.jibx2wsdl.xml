@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="archetype-webservice" default="jibx2Wsdl" basedir=".">
+	
+	<property name="jibx-home" value="/opt/jibx"/>
+	<property name="archetype-webservice-lib" value="target/webservice-0.0.6-SNAPSHOT/WEB-INF/lib"/>
+	<!-- set classpath for compiling and running application with JiBX -->
+	<path id="classpath">
+		<fileset dir="${jibx-home}/lib" includes="*.jar" />
+		<fileset dir="${archetype-webservice-lib}" includes="*.jar" />
+		<pathelement location="bin" />
+	</path>
+	
+	<property name="src.dir" value="src/main/java" />
+	<property name="resources.dir" value="src/main/resources" />
+	<property name="build.dir" value="target/classes/" />
+
+	<target name="jibx2Wsdl">
+		<echo message="Running BindGen tool" />
+		<java fork="true" failonerror="true" classname="org.jibx.ws.wsdl.tools.Jibx2Wsdl" classpathref="classpath">
+			<!-- <arg value="-o" /> -->
+			<arg value="-v" />
+			<arg value="-c" />
+			<arg value="jibx2wsdl-customize.xml" />
+			<arg value="-t" />
+			<arg value="${resources.dir}/binding_builds" />
+			<arg value="-s" />
+			<arg value="${src.dir}" />
+			<arg value="-p" />
+			<arg value="${build.dir}" />
+		</java>
+	</target>
+</project>

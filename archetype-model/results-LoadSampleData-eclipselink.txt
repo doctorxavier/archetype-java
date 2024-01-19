@@ -1,0 +1,56 @@
+GenerationType.TABLE
+-----------------------------------------------------------------------------------------------------------------------------------------------
+29-01-2014 22:07:46 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:07:46 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 1 - 25000 Insertions , time elapsed: 00:00:28:0251
+29-01-2014 22:08:04 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:08:04 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 2 - 50000 Insertions , time elapsed: 00:00:18:0188
+29-01-2014 22:08:22 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:08:22 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 3 - 75000 Insertions , time elapsed: 00:00:17:0494
+29-01-2014 22:08:39 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:08:39 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 4 - 100000 Insertions , time elapsed: 00:00:17:0468
+29-01-2014 22:08:56 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:08:56 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 5 - 125000 Insertions , time elapsed: 00:00:17:0279
+29-01-2014 22:09:14 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:09:14 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 6 - 150000 Insertions , time elapsed: 00:00:17:0371
+29-01-2014 22:09:32 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:09:32 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 7 - 175000 Insertions , time elapsed: 00:00:18:0096
+29-01-2014 22:09:50 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:09:50 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 8 - 200000 Insertions , time elapsed: 00:00:18:0133
+29-01-2014 22:10:08 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:10:08 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 9 - 225000 Insertions , time elapsed: 00:00:18:0556
+29-01-2014 22:10:26 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+29-01-2014 22:10:26 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 10 - 250000 Insertions , time elapsed: 00:00:17:0740
+29-01-2014 22:10:26 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Total 250000 insertions, time elapsed: 00:03:08:0593
+29-01-2014 22:10:38 : [INFO] test.archetype.dao.TestCRUDFather.testLoad() - Time elapsed: 00:00:11:0633, 1000 fathers, 250000 childrens
+29-01-2014 22:41:21 : [INFO] test.archetype.dao.TestCRUDFather.testLoadMarshall() - Time elapsed: 00:30:43:0359
+30-01-2014 01:57:51 : [INFO] test.archetype.dao.TestCRUDFather.testUpdate() - Time elapsed: 03:16:30:0132
+30-01-2014 02:00:29 : [INFO] test.archetype.dao.TestCRUDFather.testDelete() - Time elapsed: 00:02:38:0153
+30-01-2014 02:00:29 : [INFO] test.archetype.dao.TestCRUDFather.testCRUD() - Total Time elapsed: 03:53:11:0877
+GenerationType.IDENTITY
+-----------------------------------------------------------------------------------------------------------------------------------------------
+30-01-2014 02:05:31 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:05:31 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 1 - 25000 Insertions , time elapsed: 00:00:20:0777
+30-01-2014 02:05:48 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:05:48 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 2 - 50000 Insertions , time elapsed: 00:00:17:0282
+30-01-2014 02:06:05 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:06:05 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 3 - 75000 Insertions , time elapsed: 00:00:16:0428
+30-01-2014 02:06:22 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:06:22 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 4 - 100000 Insertions , time elapsed: 00:00:17:0407
+30-01-2014 02:06:40 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:06:40 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 5 - 125000 Insertions , time elapsed: 00:00:17:0702
+30-01-2014 02:06:57 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:06:57 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 6 - 150000 Insertions , time elapsed: 00:00:16:0924
+30-01-2014 02:07:15 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:07:15 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 7 - 175000 Insertions , time elapsed: 00:00:17:0827
+30-01-2014 02:07:32 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:07:32 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 8 - 200000 Insertions , time elapsed: 00:00:17:0117
+30-01-2014 02:07:49 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:07:49 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 9 - 225000 Insertions , time elapsed: 00:00:17:0330
+30-01-2014 02:08:06 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - ------------------------------------------
+30-01-2014 02:08:06 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Iteration: 10 - 250000 Insertions , time elapsed: 00:00:16:0763
+30-01-2014 02:08:06 : [INFO] test.archetype.dao.TestCRUDFather.testInsert() - Total 250000 insertions, time elapsed: 00:02:55:0596
+30-01-2014 02:08:18 : [INFO] test.archetype.dao.TestCRUDFather.testLoad() - Time elapsed: 00:00:11:0916, 1000 fathers, 250000 childrens
+30-01-2014 02:40:23 : [INFO] test.archetype.dao.TestCRUDFather.testLoadMarshall() - Time elapsed: 00:32:05:0353
+30-01-2014 05:54:47 : [INFO] test.archetype.dao.TestCRUDFather.testUpdate() - Time elapsed: 03:14:23:0971
+30-01-2014 05:57:33 : [INFO] test.archetype.dao.TestCRUDFather.testDelete() - Time elapsed: 00:02:45:0867
+30-01-2014 05:57:33 : [INFO] test.archetype.dao.TestCRUDFather.testCRUD() - Total Time elapsed: 03:52:22:0708

@@ -1,0 +1,5 @@
+<service>
+	<service-class>archetype.ws.endpoint.WSEndPoint</service-class>
+	<operation method="getFathers" />
+	<operation method="getChildrens" />
+</service>

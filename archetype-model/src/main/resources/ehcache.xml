@@ -1,0 +1,21 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd"  >
+	
+	<diskStore path="/home/zeus/dev/workspace/archetype/archetype-model/tmp"/>
+	
+	<defaultCache eternal="false" overflowToDisk="false" 
+		maxElementsInMemory="1" timeToIdleSeconds="30" timeToLiveSeconds="60" />
+
+	<cache name="org.flightmine.archetype.model.Father" eternal="true" copyOnRead="true" copyOnWrite="true" 
+		overflowToDisk="false" maxElementsInMemory="1" diskPersistent="true" />
+		
+	<cache name="org.flightmine.archetype.model.Children" eternal="true" copyOnRead="true" copyOnWrite="true" 
+		overflowToDisk="false" maxElementsInMemory="1" diskPersistent="true" />
+		
+<!--	<defaultCache eternal="false" overflowToDisk="false"-->
+<!--		maxElementsInMemory="1000" timeToIdleSeconds="30" timeToLiveSeconds="60" />-->
+<!-- copyOnRead="true" copyOnWrite="true"  -->
+<!--	<cache name="org.flightmine.archetype.model.Father" eternal="false"-->
+<!--		overflowToDisk="true" maxElementsInMemory="1000" timeToIdleSeconds="400"-->
+<!--		timeToLiveSeconds="400" />-->
+</ehcache>

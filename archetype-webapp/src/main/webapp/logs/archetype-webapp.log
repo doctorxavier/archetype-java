@@ -1,0 +1,2 @@
+24-11-2014 04:55:37 : [DEBUG] archetype.utils.servlet.listener.ArchetypeServletContextListener.contextInitialized() - Log4j loaded.
+24-11-2014 04:55:53 : [DEBUG] archetype.utils.servlet.listener.ArchetypeServletContextListener.contextDestroyed() - Context destroyed.

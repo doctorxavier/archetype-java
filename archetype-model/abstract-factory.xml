@@ -1,0 +1,4 @@
+<custom map-abstract="true" force-mapping="true" property-access="true"
+	value-style="element" require="none" namespace-style="fixed"
+	namespace="http://archetype/model" force-names="true" wrap-collections="true">
+</custom>

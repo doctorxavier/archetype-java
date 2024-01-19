@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:annotation-config />
+<!--	<context:load-time-weaver aspectj-weaving="on"/>-->
+<!--	<context:spring-configured />-->
+<!--	<tx:annotation-driven transaction-manager="jpaTransactionManager" proxy-target-class="false"/>-->
+	
+	<bean id="auditAdvisor" class="archetype.dao.advisor.AuditAdvisor" />
+	
+	<aop:config>
+	
+		<aop:pointcut id="jpaDaoMethods" expression="execution(* archetype.dao.jpa.IJpaDao.*(..))" />
+		<aop:pointcut id="managerMethods" expression="execution(* archetype.dao.**.I*Dao.*(..))" />
+		<aop:advisor advice-ref="auditAdvisor" pointcut-ref="jpaDaoMethods" />
+		<aop:advisor advice-ref="txJpaDaoAdvice" pointcut-ref="jpaDaoMethods" />
+		<aop:advisor advice-ref="txManagerAdvice" pointcut-ref="managerMethods" />
+	</aop:config>
+	
+	<tx:advice id="txJpaDaoAdvice" transaction-manager="jpaTransactionManager">
+		<tx:attributes>
+			<tx:method name="persist" />
+			<tx:method name="merge" />
+			<tx:method name="remove" />
+		</tx:attributes>
+	</tx:advice>
+	
+	 <tx:advice id="txManagerAdvice" transaction-manager="jpaTransactionManager">
+		<tx:attributes>
+			<tx:method name="delete" />
+			<tx:method name="delete*" />
+		</tx:attributes>
+	</tx:advice>
+	
+</beans>

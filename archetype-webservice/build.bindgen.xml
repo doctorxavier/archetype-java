@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="archetype-webservice" default="bindgen" basedir=".">
+	<property name="jibx-home" value="/opt/jibx"/>
+	<property name="archetype-webservice-lib" value="target/webservice-0.0.6-SNAPSHOT/WEB-INF/lib"/>
+	<!-- set classpath for compiling and running application with JiBX -->
+	<path id="classpath">
+		<fileset dir="${jibx-home}/lib" includes="*.jar" />
+		<fileset dir="${archetype-webservice-lib}" includes="*.jar" />
+		<pathelement location="bin" />
+	</path>
+	<!-- generate default binding and schema -->
+	<target name="bindgen">
+		<echo message="Running BindGen tool" />
+		<java classpathref="classpath" fork="true" failonerror="true"
+			classname="org.jibx.binding.generator.BindGen">
+			<!-- <arg value="-o" /> -->
+
+			<arg value="-v" />
+			<arg value="-c"/>
+			<arg value="abstract-factory.xml"/>
+			<arg value="-t" />
+			<arg value="src/main/resources/binding_builds" />
+			<arg value="-p" />
+			<arg value="target/classes" />
+			
+			<arg value="archetype.ws.model.request.GetChildrens" />
+			<arg value="archetype.ws.model.request.GetFathers" />
+			<arg value="archetype.ws.model.response.Childrens" />
+			<arg value="archetype.ws.model.response.Fathers" />
+		</java>
+	</target>
+</project>

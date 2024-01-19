@@ -1,0 +1,35 @@
+<binding xmlns:ns1="http://archetype/model" name="binding" package="archetype.model">
+  <namespace uri="http://archetype/model" default="elements"/>
+  <mapping abstract="true" type-name="ns1:father" class="archetype.model.Father">
+    <structure map-as="ns1:audit" get-method="getAudit" set-method="setAudit" usage="optional" name="audit"/>
+    <structure map-as="ns1:children" get-method="getChildren" set-method="setChildren" usage="optional" name="children"/>
+    <collection get-method="getChildrens" set-method="setChildrens" usage="optional" name="childrens" create-type="java.util.ArrayList">
+      <structure map-as="ns1:children" name="children"/>
+    </collection>
+    <structure map-as="ns1:father" get-method="getFather" set-method="setFather" usage="optional" name="father"/>
+    <collection get-method="getFathers" set-method="setFathers" usage="optional" name="fathers" 
+    	marshaller="archetype.utils.jibx.JibxHashMapper" unmarshaller="archetype.utils.jibx.JibxHashMapper" />
+    <value style="element" name="id" get-method="getId" set-method="setId" usage="optional"/>
+    <value style="element" name="name" get-method="getName" set-method="setName" usage="optional"/>
+    <value style="element" name="version" get-method="getVersion" set-method="setVersion" usage="optional"/>
+    <value style="element" name="mother" get-method="isMother" set-method="setMother" usage="optional"/>
+  </mapping>
+  <mapping class="archetype.model.Father" name="father">
+    <structure map-as="ns1:father"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:children" class="archetype.model.Children">
+    <structure map-as="ns1:audit" get-method="getAudit" set-method="setAudit" usage="optional" name="audit"/>
+    <collection get-method="getFathers" set-method="setFathers" usage="optional" name="fathers" 
+    	marshaller="archetype.utils.jibx.JibxHashMapper" unmarshaller="archetype.utils.jibx.JibxHashMapper" />
+    <value style="element" name="id" get-method="getId" set-method="setId" usage="optional"/>
+    <value style="element" name="name" get-method="getName" set-method="setName" usage="optional"/>
+    <value style="element" name="version" get-method="getVersion" set-method="setVersion" usage="optional"/>
+  </mapping>
+  <mapping class="archetype.model.Children" name="children">
+    <structure map-as="ns1:children"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns1:audit" class="archetype.model.Audit">
+    <value style="element" name="created" get-method="getCreated" set-method="setCreated" usage="optional"/>
+    <value style="element" name="modified" get-method="getModified" set-method="setModified" usage="optional"/>
+  </mapping>
+</binding>

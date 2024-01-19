@@ -1,0 +1,86 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://archetype/ws/model" elementFormDefault="qualified" targetNamespace="http://archetype/ws/model">
+  <xs:element type="tns:childrens" name="childrens"/>
+  <xs:complexType name="father">
+    <xs:sequence>
+      <xs:element type="tns:audit" name="audit" minOccurs="0"/>
+      <xs:element type="tns:children" name="children" minOccurs="0"/>
+      <xs:element name="childrens" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="tns:children" name="children" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element type="tns:father" name="father" minOccurs="0"/>
+      <xs:element name="fathers" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="tns:father" name="father" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element type="xs:int" name="id" minOccurs="0"/>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
+      <xs:element type="xs:int" name="version" minOccurs="0"/>
+      <xs:element type="xs:boolean" name="mother" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="audit">
+    <xs:sequence>
+      <xs:element type="xs:dateTime" name="created" minOccurs="0"/>
+      <xs:element type="xs:dateTime" name="modified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element type="tns:fathers" name="fathers"/>
+  <xs:element type="tns:getFathers" name="getFathers"/>
+  <xs:complexType name="getChildrens">
+    <xs:sequence>
+      <xs:element type="xs:int" name="rows" minOccurs="0"/>
+      <xs:element type="xs:int" name="start" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getFathers">
+    <xs:sequence>
+      <xs:element type="xs:int" name="rows" minOccurs="0"/>
+      <xs:element type="xs:int" name="start" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fathers">
+    <xs:sequence>
+      <xs:element name="fathers" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="tns:father" name="father" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="childrens">
+    <xs:sequence>
+      <xs:element name="childrens" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="tns:children" name="children" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element type="tns:getChildrens" name="getChildrens"/>
+  <xs:complexType name="children">
+    <xs:sequence>
+      <xs:element type="tns:audit" name="audit" minOccurs="0"/>
+      <xs:element name="fathers" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="tns:father" name="father" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element type="xs:int" name="id" minOccurs="0"/>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
+      <xs:element type="xs:int" name="version" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

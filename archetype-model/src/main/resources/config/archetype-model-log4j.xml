@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="Console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- <param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss} : [%p] %c - %m%n" /> -->
+			<!-- WARNING: The next line is not for production purposes, the %C and %M modifiers consumes resources, use the previous  -->
+			<param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss} : [%p] %C.%M() - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="File" class="org.apache.log4j.RollingFileAppender">
+		<param name="MaxFileSize" value="2MB" />
+		<param name="MaxBackupIndex" value="2" />
+		<param name="File" value="archetype-model.log" />
+		<param name="Append" value="false" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- <param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss} : [%p] %c - %m%n" /> -->
+			<!-- WARNING: The next line is not for production purposes, the %C and %M modifiers consumes resources, use the previous  -->
+			<param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss} : [%p] %C.%M() - %m%n" />
+		</layout>
+	</appender>
+	
+<!--	<appender name="File" class="org.apache.log4j.FileAppender">-->
+<!--		<param name="File" value="mrs-model-cache.html" />-->
+<!--		<param name="Append" value="true" />-->
+<!--		<layout class="org.apache.log4j.HTMLLayout"/>-->
+<!--	</appender>-->
+
+	<!-- to see the file, execute 'java -classpath log4j-1.2.xx.jar org.apache.log4j.chainsaw.Main' -->
+<!--	<appender name="File" class="org.apache.log4j.FileAppender">-->
+<!--		<param name="File" value="mrs-model-cache.xml" />-->
+<!--		<param name="Append" value="true" />-->
+<!--		<layout class="org.apache.log4j.xml.XMLLayout"/>-->
+<!--	</appender>-->
+
+	<logger name="archetype">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="test.archetype">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="org.springframework">
+		<level value="error" />
+	</logger>
+	
+	<root>
+		<level value="info" />
+		<appender-ref ref="File" />
+		<appender-ref ref="Console" />
+	</root>
+
+</log4j:configuration>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="wSEndpoint" class="archetype.ws.endpoint.WSEndPoint">
+		<property name="fatherManager" ref="fatherManager" />
+		<property name="childrenManager" ref="childrenManager" />
+	</bean>
+	
+	<bean id="serviceDefinition" class="org.jibx.ws.server.ServiceDefinition" init-method="init">
+		<property name="serviceObject" ref="wSEndpoint" />
+		<property name="operationDefinitions">
+			<list>
+				<bean class="org.jibx.ws.server.OperationDefinition">
+					<property name="methodName" value="getFathers" />
+				</bean>
+				<bean class="org.jibx.ws.server.OperationDefinition">
+					<property name="methodName" value="getChildrens" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="serviceMapper" class="org.jibx.ws.http.servlet.SingleServiceMapper">
+		<property name="serviceDefinition" ref="serviceDefinition" />
+	</bean>
+	
+	<import resource="classpath:/beans/application/context/archetype-webservice.xml"/>
+	
+</beans>

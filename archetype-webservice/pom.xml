@@ -1,0 +1,281 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>archetype</artifactId>
+		<groupId>archetype</groupId>
+		<version>0.0.7-SNAPSHOT</version>
+	</parent>
+	<groupId>archetype.archetype</groupId>
+	<artifactId>webservice</artifactId>
+	<packaging>war</packaging>
+	<name>archetype-webservice</name>
+	<url>http://maven.apache.org</url>
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>*/**</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${encoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven.resources.plugin.version}</version>
+				<configuration>
+					<encoding>${encoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven.checkstyle.plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<configLocation>${project.parent.basedir}/checkstyle.xml</configLocation>
+					<encoding>${encoding}</encoding>
+					<logViolationsToConsole>true</logViolationsToConsole>
+					<failsOnError>true</failsOnError>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					<violationSeverity>warning</violationSeverity>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jibx</groupId>
+				<artifactId>jibx-maven-plugin</artifactId>
+				<version>${jibx.version}</version>
+				<configuration>
+					<schemaBindingDirectory>src/main/resources/binding</schemaBindingDirectory>
+					<includeSchemaBindings>
+						<includeSchemaBinding>binding.xml</includeSchemaBinding>
+					</includeSchemaBindings>
+					<verbose>true</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>bind</goal>
+						</goals>
+					</execution>
+				</executions>
+				<!-- bcel library problem with java 8 -->
+				<dependencies>
+					<dependency>
+						<groupId>org.jibx</groupId>
+						<artifactId>jibx-bind</artifactId>
+						<version>${jibx.version}</version>
+						<exclusions>
+							<exclusion>
+								<artifactId>bcel</artifactId>
+								<groupId>bcel</groupId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.bcel</groupId>
+						<artifactId>bcel</artifactId>
+						<version>6.0-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>${maven.antrun.plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>process-classes</phase>
+						<configuration>
+							<tasks>
+								<property name="runtime_classpath" refid="maven.runtime.classpath" />
+								<ant antfile="${basedir}/build.bindgen.xml">
+									<target name="bindgen" />
+								</ant>
+							</tasks>
+						</configuration>
+<!--						<goals>-->
+<!--							<goal>run</goal>-->
+<!--						</goals>-->
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<!-- -->
+		<!-- Several key Java EE APIs and RIs are missing from the Maven Central -->
+		<!-- Repository -->
+		<!-- -->
+		<!-- -->
+		<!-- The goal is to eventually eliminate the reliance on the JBoss -->
+		<!-- repository -->
+		<!-- -->
+<!-- 		<repository> -->
+<!-- 			<id>jboss-releases-repository</id> -->
+<!-- 			<name>JBoss Releases Repository</name> -->
+<!-- 			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url> -->
+<!-- 		</repository> -->
+		
+		<repository>
+			<id>maven-repo-flightmine</id>
+			<name>Flightmine Repository</name>
+			<url>http://maven.flightmine.com</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>archetype.archetype</groupId>
+			<artifactId>model</artifactId>
+			<version>0.0.7-SNAPSHOT</version>
+			<!-- <exclusions> -->
+			<!-- <exclusion> -->
+			<!-- <artifactId>mysql-connector-java</artifactId> -->
+			<!-- <groupId>mysql</groupId> -->
+			<!-- </exclusion> -->
+			<!-- </exclusions> -->
+		</dependency>
+		<dependency>
+			<groupId>org.jibx</groupId>
+			<artifactId>jibx-ws</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jibx</groupId>
+			<artifactId>xbis-jibx</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.qdox</groupId>
+			<artifactId>qdox</artifactId>
+			<version>1.12.1</version>
+		</dependency>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jibx</groupId>
+			<artifactId>jibx-extras</artifactId>
+			<version>1.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-core</artifactId>
+			<version>2.2.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-support</artifactId>
+			<version>2.2.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ws.commons.axiom</groupId>
+			<artifactId>axiom-api</artifactId>
+			<version>1.2.14</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ws.commons.axiom</groupId>
+			<artifactId>axiom-impl</artifactId>
+			<version>1.2.14</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.10.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ws.xmlschema</groupId>
+			<artifactId>xmlschema-core</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-mock</artifactId>
+			<version>2.0.8</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
